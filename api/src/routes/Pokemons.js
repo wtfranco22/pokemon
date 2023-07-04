@@ -2,7 +2,7 @@ const { getPokemons,
     getPokemonById,
     getPokemonByName,
     createPokemon,
-    // updatePokemon,
+    updatePokemon,
     deletePokemon
 } = require('../controllers/Pokemons');
 
@@ -13,7 +13,7 @@ router.get('/', (req,res)=>{
     (name) ? getPokemonByName(req,res) : getPokemons(req,res);
 });
 router.post('/', createPokemon);
-// router.put('/:id', updatePokemon);
+router.put('/:id', updatePokemon);
 router.get('/:id', getPokemonById);
 router.delete('/:id', deletePokemon);
 

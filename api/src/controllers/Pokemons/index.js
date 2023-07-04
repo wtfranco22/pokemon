@@ -2,7 +2,7 @@ const getPokemons = require('./getPokemons');
 const getPokemonById = require('./getPokemonById');
 const getPokemonByName = require('./getPokemonByName');
 const createPokemon = require('./createPokemon');
-// const updatePokemon = require('./updatePokemon');
+const updatePokemon = require('./updatePokemon');
 const deletePokemon = require('./deletePokemon');
 
 module.exports = {
@@ -10,6 +10,6 @@ module.exports = {
     getPokemonById,
     getPokemonByName,
     createPokemon,
-    // updatePokemon,
+    updatePokemon,
     deletePokemon
 }
