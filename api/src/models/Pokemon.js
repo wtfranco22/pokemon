@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING
     },
-    life: {
+    hp: {
       type: DataTypes.INTEGER,
       validate: {
         min: 0
