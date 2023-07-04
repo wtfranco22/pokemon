@@ -14,5 +14,5 @@ module.exports = (sequelize) => {
                 this.setDataValue('name', value.toLowerCase());
             }
         },
-    }, { timestaps: false });
+    }, { timestamps: false });
 }
