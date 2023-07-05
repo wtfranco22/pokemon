@@ -1,16 +1,16 @@
-const { getPokemons,
+const {
     getPokemonById,
     getPokemonByName,
     createPokemon,
     updatePokemon,
     deletePokemon
 } = require('../controllers/Pokemons');
-
+const getPokemons = require('../handlers/getPokemons');
 const router = require('express').Router();
 
-router.get('/', (req,res)=>{
-    const {name} = req.query;
-    (name) ? getPokemonByName(req,res) : getPokemons(req,res);
+router.get('/', (req, res) => {
+    const { name } = req.query;
+    (name) ? getPokemonByName(req, res) : getPokemons(req, res);
 });
 router.post('/', createPokemon);
 router.put('/:id', updatePokemon);
