@@ -1,12 +1,16 @@
-const URL = 'https://pokeapi.co/api/v2/pokemon';
+const URL = 'https://pokeapi.co/api/v2/pokemon?limit=1281';
 const axios = require('axios');
 const { Pokemon } = require('../../db');
 
 module.exports = async (req, res) => {
+    let index = +req.query.index || 0;
+    let cant = +req.query.cant || 5;
     try {
-        const myPokemons = await Pokemon.findAll();
+        const myPokemons = await Pokemon.findAll({ index: index, limit: cant });
+        if (myPokemons.length == cant) return res.status(200).json(myPokemons);
+        cant = index + cant - myPokemons.length;
         const { data } = await axios.get(URL);
-        const getDetailsPokemon = data.results.map(async (pokemon) => {
+        const getDetailsPokemon = data.results.slice(index, cant).map(async (pokemon) => {
             const { data } = await axios(pokemon.url);
             let { id, name, sprites, stats, weight, height, types } = data;
             let allTypes = types.map((type) => ({ "name": type.type.name }));
