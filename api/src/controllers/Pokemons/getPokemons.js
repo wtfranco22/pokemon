@@ -1,23 +1,18 @@
-const URL = 'https://pokeapi.co/api/v2/pokemon?limit=1281';
-const axios = require('axios');
-const { Pokemon } = require('../../db');
+const dbPokemons = require('../../helpers/Pokemons/getBd');
+const apiPokemons = require('./../../helpers/Pokemons/getApi');
 
 module.exports = async (req, res) => {
     let index = +req.query.index || 0;
-    let cant = +req.query.cant || 5;
+    let cant = +req.query.cant || 12;
     try {
-        const myPokemons = await Pokemon.findAll({ index: index, limit: cant });
-        if (myPokemons.length == cant) return res.status(200).json(myPokemons);
-        cant = index + cant - myPokemons.length;
-        const { data } = await axios.get(URL);
-        const getDetailsPokemon = data.results.slice(index, cant).map(async (pokemon) => {
-            const { data } = await axios(pokemon.url);
-            let { id, name, sprites, stats, weight, height, types } = data;
-            let allTypes = types.map((type) => ({ "name": type.type.name }));
-            return { id, name, image: sprites.other.home.front_default, hp: stats[0].base_stat, attack: stats[1].base_stat, defense: stats[2].base_stat, speed: stats[5].base_stats, weight, height, types: allTypes };
-        });
-        const pokemonDetails = await Promise.all(getDetailsPokemon);
-        return res.status(200).json([...myPokemons, ...pokemonDetails]);
+        const api = await apiPokemons(index, (index + cant));
+        if (api.length == cant) return res.status(200).json(api);
+        index = index + api.length;
+        cant = cant - api.length;
+        const db = await dbPokemons(index, (index + cant));
+        if (!db && !api) throw new Error('Pokemons not found');
+        const pokemons = [...db, ...api];
+        return res.status(200).json(pokemons);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
