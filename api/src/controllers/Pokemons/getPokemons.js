@@ -8,8 +8,9 @@ module.exports = async (req, res) => {
         const { data } = await axios.get(URL);
         const getDetailsPokemon = data.results.map(async (pokemon) => {
             const { data } = await axios(pokemon.url);
-            let { id, name, sprites, stats, weight, height } = data;
-            return { id, name, image: sprites.other.home.front_default, hp: stats[0].base_stat, attack: stats[1].base_stat, defense: stats[2].base_stat, speed: stats[5].base_stats, weight, height };
+            let { id, name, sprites, stats, weight, height, types } = data;
+            let allTypes = types.map((type) => ({ "name": type.type.name }));
+            return { id, name, image: sprites.other.home.front_default, hp: stats[0].base_stat, attack: stats[1].base_stat, defense: stats[2].base_stat, speed: stats[5].base_stats, weight, height, types: allTypes };
         });
         const pokemonDetails = await Promise.all(getDetailsPokemon);
         return res.status(200).json([...myPokemons, ...pokemonDetails]);
