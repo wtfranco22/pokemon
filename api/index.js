@@ -19,7 +19,7 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const seederTypes = require('./src/seeders/Types.js');
+const seederTypes = require('./seeders');
 
 // Syncing all the models at once.
 conn.sync({ force: true })

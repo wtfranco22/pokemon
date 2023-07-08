@@ -1,7 +1,7 @@
 const axios = require('axios');
-const { Type } = require('../db');
+const { Type } = require('../src/db');
 const URL = 'https://pokeapi.co/api/v2/type';
-async function seederTypes() {
+module.exports = async () => {
     try {
         let types = await Type.findAll();
         if (types.length < 1) {
@@ -16,6 +16,5 @@ async function seederTypes() {
         }
     } catch (error) {
         console.log('Error seeder Type---> ERROR: ' + error.message);
-    }
+    };
 };
-module.exports = seederTypes;
