@@ -1,11 +1,12 @@
 const {
+    getPokemons,
+    updatePokemon,
+    createPokemon,
     getPokemonById,
     getPokemonByName,
-    createPokemon,
-    updatePokemon,
     deletePokemon
-} = require('../controllers/Pokemons');
-const getPokemons = require('../handlers/getPokemons');
+} = require('../handlers');
+
 const router = require('express').Router();
 
 router.get('/', (req, res) => {

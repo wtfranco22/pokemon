@@ -1,10 +1,7 @@
 const { Pokemon, Type } = require('../../db');
-const cantApi = 1281;
-async function dbPokemons(index, end) {
-    let init = cantApi - index;
+
+module.exports = async () => {
     const pokemons = await Pokemon.findAll({
-        offset: init,
-        limit: end,
         include: {
             model: Type,
             attributes: ['name'],
@@ -13,6 +10,9 @@ async function dbPokemons(index, end) {
             }
         }
     });
-    return pokemons;
+    console.log(typeof(pokemons))
+    if (pokemons) {
+        return pokemons;
+    }
+    throw new Error(`ERROR: helpers/getBD ${error.message}`);
 };
-module.exports = dbPokemons;
