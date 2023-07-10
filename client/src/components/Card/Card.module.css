@@ -1,0 +1,16 @@
+.container {
+    background-color: beige;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    width: 11em;
+    padding: 0 2em;
+    margin-top: 3em;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+.image {
+    transform: translateY(-50%);
+}

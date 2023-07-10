@@ -1,5 +1,5 @@
-import LandingPage from './LandingPage/LandingPage';
-import HomePage from './HomePage/HomePage';
+import Landing from './Landing/Landing';
+import Home from './Home/Home';
 export {
-    LandingPage, HomePage
+    Landing, Home
 }

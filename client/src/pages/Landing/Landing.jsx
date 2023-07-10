@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import styles from './LandingPage.module.css';
+import styles from './Landing.module.css';
 
 const LandingPage = ({ start }) => {
     const handleClick = () => {
@@ -8,7 +7,7 @@ const LandingPage = ({ start }) => {
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                <NavLink to='/Home' onClick={handleClick} className={styles.link} > START </NavLink>
+                <button onClick={handleClick} className={styles.link}> START </button>
             </div>
         </div>
     );

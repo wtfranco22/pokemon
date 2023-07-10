@@ -1,23 +1,31 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { LandingPage, HomePage } from './pages';
+import { Landing, Home } from './pages';
 import { useEffect } from 'react';
 import './App.css';
-import { setAccess } from './redux/actions';
+import { loadingPokemons, setAccess } from './redux/actions';
+import { Header } from './components';
 
-function App() {
+const App = () => {
   const { access } = useSelector((state) => state);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const start = (bool) => dispatch(setAccess(bool));
+  const start = (bool) => {
+    dispatch(setAccess(bool));
+    navigate('/Home');
+  };
   useEffect(() => {
+    dispatch(loadingPokemons());
     !access && navigate('/');
-  }, [access, navigate]);
+  }, []);
   return (
-    <Routes>
-      <Route path='/' element={<LandingPage start={start} />} />
-      <Route path='/Home' element={<HomePage />} />
-    </Routes>
+    <>
+      {access && <Header />}
+      <Routes>
+        <Route path='/' element={<Landing start={start} />} />
+        <Route path='/Home' element={<Home />} />
+      </Routes>
+    </>
   );
 }
 
