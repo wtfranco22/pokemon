@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Landing, Home } from './pages';
+import { Landing, Home, Detail } from './pages';
 import { useEffect } from 'react';
 import './App.css';
 import { loadingPokemons, setAccess } from './redux/actions';
@@ -24,6 +24,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Landing start={start} />} />
         <Route path='/Home' element={<Home />} />
+        <Route path='/Details/:id' element={<Detail />} />
       </Routes>
     </>
   );
