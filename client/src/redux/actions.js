@@ -3,7 +3,8 @@ import {
     LOADING_POKEMONS,
     SET_ACCESS,
     GET_POKEMON_DETAIL,
-    CLEAN_POKEMON_DETAIL
+    CLEAN_POKEMON_DETAIL,
+    CREATE_POKEMON
 } from './types';
 import axios from 'axios';
 
@@ -45,5 +46,19 @@ export const getPokemonDetail = (id) => {
 export const cleanPokemonDetail = () => {
     return {
         type: CLEAN_POKEMON_DETAIL
+    };
+};
+
+export const createPokemon = (pokemon) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(URL, pokemon);
+            dispatch({
+                type: CREATE_POKEMON,
+                payload: data
+            });
+        } catch (error) {
+            alert(error.message);
+        };
     };
 };

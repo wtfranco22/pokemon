@@ -4,7 +4,7 @@ import styles from './Cards.module.css';
 const Cards = ({ pokemons }) => {
     return (
         <div className={styles.container}>
-            {pokemons.map((pokemon) =>
+            {pokemons?.map((pokemon) =>
                 (<Card key={pokemon.id} pokemon={pokemon} />))}
         </div>
     );
