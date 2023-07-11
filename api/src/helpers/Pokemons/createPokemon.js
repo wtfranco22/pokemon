@@ -13,5 +13,12 @@ module.exports = async (pokemon) => {
         where: { id: typeIds }
     });
     await newPokemon.setTypes(types);
+    await newPokemon.reload({
+        include: {
+            model: Type,
+            attributes: ['name'],
+            through: { attributes: [] }
+        }
+    });
     return newPokemon;
 }
