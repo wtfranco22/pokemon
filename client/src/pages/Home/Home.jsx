@@ -9,15 +9,15 @@ const Home = () => {
     const indexPage = useSelector((state) => state.indexPage);
     const quantityPages = useSelector((state) => state.quantityPages);
     const allTypes = useSelector((state) => state.allTypes);
+    const filterByType = useSelector((state) => state.filterByType);
+    const filterByStorage = useSelector((state) => state.filterByStorage);
     const [showPokemons, setShowPokemons] = useState([]);
-    const [showStorage, setShowStorage] = useState('all');
     const dispatch = useDispatch();
     const handleClick = (event) => {
         let index = (event.target.value === '+') ? (indexPage - 1) : (indexPage + 1);
         dispatch(setIndexPage(index));
     };
     const handleChangeStorage = (event) => {
-        setShowStorage(event.target.value);
         dispatch(setStoragePokemons(event.target.value));
     }
     const handleChangeType = (event) => {
@@ -30,11 +30,11 @@ const Home = () => {
         <div className={styles.container}>
             <h1>Home</h1>
             <div>
-                <input type="radio" value="bd" name="storage" checked={showStorage === 'bd'} onChange={handleChangeStorage} /> DB
-                <input type="radio" value="api" name="storage" checked={showStorage === 'api'} onChange={handleChangeStorage} /> API
-                <input type="radio" value="all" name="storage" checked={showStorage === 'all'} onChange={handleChangeStorage} /> API & BD
+                <input type="radio" value="bd" name="storage" checked={filterByStorage === 'bd'} onChange={handleChangeStorage} /> DB
+                <input type="radio" value="api" name="storage" checked={filterByStorage === 'api'} onChange={handleChangeStorage} /> API
+                <input type="radio" value="all" name="storage" checked={filterByStorage === 'all'} onChange={handleChangeStorage} /> API & BD
             </div>
-            <select onChange={handleChangeType} >
+            <select value={filterByType} onChange={handleChangeType} >
                 <option value={'all'}>All types</option>
                 {allTypes?.map((type) => {
                     return (<option key={type.id} value={type.name}>{type.name}</option>);

@@ -14,10 +14,11 @@ const initialState = {
     access: false,
     pokemons: [],
     allTypes: [],
-    pokemonsByOrigen: [],
+    pokemonsByStorage: [],
     pokemonsByTypes: [],
     updatedShowPokemons: [],
-    typeFilter: 'all',
+    filterByStorage: 'all',
+    filterByType: 'all',
     pokemonDetail: null,
     indexPage: 1,
     quantityPokemons: 12,
@@ -32,7 +33,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 pokemons: payload,
-                pokemonsByOrigen: payload,
+                pokemonsByStorage: payload,
                 pokemonsByTypes: payload,
                 updatedShowPokemons: payload.slice(state.indexfirstPokemon, state.indexLastPokemon),
                 quantityPages: Math.round(payload.length / state.quantityPokemons),
@@ -73,21 +74,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
             return {
                 ...state,
-                pokemonsByOrigen: updateByStorage,
+                filterByStorage: payload,
+                pokemonsByStorage: updateByStorage,
             };
         case SET_TYPE_POKEMONS:
             let updateByType = [];
-            let filter = payload || state.typeFilter;
+            let filter = payload || state.filterByType;
             if (filter === 'all') {
-                updateByType = state.pokemonsByOrigen;
+                updateByType = state.pokemonsByStorage;
             } else {
-                updateByType = state.pokemonsByOrigen.filter((pokemon) =>
+                updateByType = state.pokemonsByStorage.filter((pokemon) =>
                     (pokemon.types.find((tipe) => tipe.name === filter))
                 );
             };
             return {
                 ...state,
-                typeFilter: filter,
+                filterByType: filter,
                 quantityPages: Math.round(updateByType.length / state.quantityPokemons),
                 pokemonsByTypes: updateByType,
             };
