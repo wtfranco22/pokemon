@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Landing, Home, Detail, Create } from './pages';
 import { useEffect } from 'react';
 import './App.css';
-import { loadingPokemons, setAccess } from './redux/actions';
+import { loadingPokemons, loadingTypes, setAccess } from './redux/actions';
 import { Header } from './components';
 
 const App = () => {
-  const { access } = useSelector((state) => state);
+  const access = useSelector((state) => state.access);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const start = (bool) => {
@@ -16,6 +16,7 @@ const App = () => {
   };
   useEffect(() => {
     dispatch(loadingPokemons());
+    dispatch(loadingTypes());
     !access && navigate('/');
   }, []);
   return (

@@ -4,7 +4,11 @@ import {
     SET_ACCESS,
     GET_POKEMON_DETAIL,
     CLEAN_POKEMON_DETAIL,
-    CREATE_POKEMON
+    CREATE_POKEMON,
+    SET_INDEX_PAGE,
+    LOADING_TYPES,
+    SET_TYPE_POKEMONS,
+    SET_STORAGE_POKEMONS
 } from './types';
 import axios from 'axios';
 
@@ -12,12 +16,26 @@ export const loadingPokemons = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios(URL);
-            dispatch({
+            await dispatch({
                 type: LOADING_POKEMONS,
                 payload: data
             });
         } catch (error) {
             console.log(error.message);
+        };
+    };
+};
+
+export const loadingTypes = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios('http://localhost:3001/types');
+            await dispatch({
+                type: LOADING_TYPES,
+                payload: data
+            });
+        } catch (error) {
+            alert(error.message);
         };
     };
 };
@@ -33,7 +51,7 @@ export const getPokemonDetail = (id) => {
     return async (dispatch) => {
         try {
             const { data } = await axios(`${URL}/${id}`);
-            dispatch({
+            await dispatch({
                 type: GET_POKEMON_DETAIL,
                 payload: data
             });
@@ -52,13 +70,33 @@ export const cleanPokemonDetail = () => {
 export const createPokemon = (pokemon) => {
     return async (dispatch) => {
         try {
+            console.log(pokemon);
             const { data } = await axios.post(URL, pokemon);
-            dispatch({
+            await dispatch({
                 type: CREATE_POKEMON,
                 payload: data
             });
         } catch (error) {
             alert(error.message);
         };
+    };
+};
+
+export const setIndexPage = (index) => {
+    return { type: SET_INDEX_PAGE, payload: index };
+};
+
+export const setTypesPokemons = (type) => {
+    return async (dispatch) => {
+        await dispatch({ type: SET_TYPE_POKEMONS, payload: type });
+        await dispatch(setIndexPage(1));
+    };
+};
+
+export const setStoragePokemons = (storage) => {
+    return async (dispatch) => {
+        await dispatch({ type: SET_STORAGE_POKEMONS, payload: storage });
+        await dispatch({ type: SET_TYPE_POKEMONS, payload: false });
+        await dispatch(setIndexPage(1));
     };
 };
