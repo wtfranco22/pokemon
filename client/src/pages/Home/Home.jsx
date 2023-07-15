@@ -5,7 +5,10 @@ import { useEffect, useState } from 'react';
 import { setIndexPage, setStoragePokemons, setTypesPokemons } from '../../redux/actions';
 
 const Home = () => {
-    const { updatedShowPokemons, indexPage, quantityPages, allTypes } = useSelector((state) => state);
+    const updatedShowPokemons = useSelector((state) => state.updatedShowPokemons);
+    const indexPage = useSelector((state) => state.indexPage);
+    const quantityPages = useSelector((state) => state.quantityPages);
+    const allTypes = useSelector((state) => state.allTypes);
     const [showPokemons, setShowPokemons] = useState([]);
     const [showStorage, setShowStorage] = useState('all');
     const dispatch = useDispatch();
@@ -26,10 +29,10 @@ const Home = () => {
     return (
         <div className={styles.container}>
             <h1>Home</h1>
-            <div onChange={handleChangeStorage}>
-                <input type="radio" value="bd" name="storage" checked={showStorage === 'bd'} /> DB
-                <input type="radio" value="api" name="storage" checked={showStorage === 'api'} /> API
-                <input type="radio" value="all" name="storage" defaultChecked={showPokemons} checked={showStorage === 'all'} /> API & BD
+            <div>
+                <input type="radio" value="bd" name="storage" checked={showStorage === 'bd'} onChange={handleChangeStorage} /> DB
+                <input type="radio" value="api" name="storage" checked={showStorage === 'api'} onChange={handleChangeStorage} /> API
+                <input type="radio" value="all" name="storage" checked={showStorage === 'all'} onChange={handleChangeStorage} /> API & BD
             </div>
             <select onChange={handleChangeType} >
                 <option value={'all'}>All types</option>
@@ -41,7 +44,7 @@ const Home = () => {
                 <button onClick={handleClick} value={'+'} disabled={indexPage === 1}>
                     Anterior
                 </button>
-                <span>{indexPage} / {quantityPages}</span>
+                <span>{indexPage} / {quantityPages || 1}</span>
                 <button onClick={handleClick} value={'-'} disabled={indexPage >= quantityPages}>Siguiente</button>
             </div>
             <Cards pokemons={showPokemons} />
@@ -49,7 +52,7 @@ const Home = () => {
                 <button onClick={handleClick} value={'+'} disabled={indexPage === 1}>
                     Anterior
                 </button>
-                <span>{indexPage} / {quantityPages}</span>
+                <span>{indexPage} / {quantityPages || 1}</span>
                 <button onClick={handleClick} value={'-'} disabled={indexPage >= quantityPages}>Siguiente</button>
             </div>
         </div>

@@ -21,7 +21,7 @@ const initialState = {
     pokemonDetail: null,
     indexPage: 1,
     quantityPokemons: 12,
-    indexFirtsPokemon: 0,
+    indexfirstPokemon: 0,
     indexLastPokemon: 12,
     quantityPages: 1,
 };
@@ -34,7 +34,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 pokemons: payload,
                 pokemonsByOrigen: payload,
                 pokemonsByTypes: payload,
-                updatedShowPokemons: payload.slice(state.indexFirtsPokemon, state.indexLastPokemon),
+                updatedShowPokemons: payload.slice(state.indexfirstPokemon, state.indexLastPokemon),
                 quantityPages: Math.round(payload.length / state.quantityPokemons),
             };
         case LOADING_TYPES:
@@ -92,14 +92,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 pokemonsByTypes: updateByType,
             };
         case SET_INDEX_PAGE:
-            let firts = (payload - 1) * state.quantityPokemons;
+            let first = (payload - 1) * state.quantityPokemons;
             let last = payload * state.quantityPokemons;
-            let update = state.pokemonsByTypes.slice(firts, last);
+            let update = state.pokemonsByTypes.slice(first, last);
             return {
                 ...state,
                 indexPage: payload,
                 indexLastPokemon: last,
-                indexFirstPokemon: firts,
+                indexFirstPokemon: first,
                 updatedShowPokemons: update
             };
         default: return { ...state };

@@ -1,14 +1,35 @@
+const regexAZ = /^[a-záéíóú]+$/i;
+const regexInt = /^([1-9]\d{0,2}|999)$/;
+const regexHTTPS = /^https:\/\//;
 const validate = (pokemonData) => {
     let errors = {};
-    if(pokemonData.name.trim()==='' || !isNaN(pokemonData.name)) errors.name = 'Invalid Data';
-    if(pokemonData.image.trim()==='') errors.image = 'Invalid Data';
-    if(pokemonData.hp.trim()==='' || isNaN(pokemonData.hp)) errors.hp = 'Invalid Data';
-    if(pokemonData.attack.trim()==='' || isNaN(pokemonData.attack)) errors.attack = 'Invalid Data';
-    if(pokemonData.defense.trim()==='' || isNaN(pokemonData.defense)) errors.defense = 'Invalid Data';
-    if(pokemonData.speed.trim()==='' || isNaN(pokemonData.speed)) errors.speed = 'Invalid Data';
-    if(pokemonData.height.trim()==='' || isNaN(pokemonData.height)) errors.height = 'Invalid Data';
-    if(pokemonData.weight.trim()==='' || isNaN(pokemonData.weight)) errors.weight = 'Invalid Data';
+    if (!regexAZ.test(pokemonData.name.toLowerCase())) errors.name = 'Please enter a string';
+    if (pokemonData.length > 50) errors.name = 'The name exceeds the character limit allowed'
+    if (pokemonData.image.trim() !== '') {
+        if (!regexHTTPS.test(pokemonData.image)) errors.image = 'Image URL must start with "https://"';
+    }
+    if (!regexInt.test(pokemonData.hp)) errors.hp = 'Please enter a number between 1 and 999';
+    if (!regexInt.test(pokemonData.attack)) errors.attack = 'Please enter a number between 1 and 999';
+    if (!regexInt.test(pokemonData.defense)) errors.defense = 'Please enter a number between 1 and 999';
+    if (!regexInt.test(pokemonData.speed)) errors.speed = 'Please enter a number between 1 and 999';
+    if (pokemonData.height !== 0) {
+        if (!regexInt.test(pokemonData.height)) errors.height = 'Please enter a number between 1 and 999';
+    };
+    if (pokemonData.weight !== 0) {
+        if (!regexInt.test(pokemonData.weight)) errors.weight = 'Please enter a number between 1 and 999';
+    };
+    if (!(pokemonData.typeIds.length >= 1 && pokemonData.typeIds.length <= 2)) errors.typeIds = 'Please select 1 or 2 types';
     return errors;
 };
-
-export default validate;
+const validateTypes = (types) => {
+    let resTypes = [];
+    types.forEach((type) => {
+        if (!resTypes.includes(type)) {
+            resTypes.push(type);
+        } else {
+            resTypes.splice(resTypes.indexOf(type), 1);
+        };
+    });
+    return resTypes;
+};
+export { validate, validateTypes };
