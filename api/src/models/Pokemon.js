@@ -18,12 +18,13 @@ module.exports = (sequelize) => {
       }
     },
     image: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     hp: {
       type: DataTypes.INTEGER,
       validate: {
-        min: 0
+        min: 1
       }
     },
     attack: {
@@ -40,28 +41,24 @@ module.exports = (sequelize) => {
     },
     speed: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       validate: {
         min: 1
       }
     },
     height: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       validate: {
         min: 1
       },
-      get() {
-        return `${this.getDataValue('height')} cm`;
-      }
     },
     weight: {
-      type: DataTypes.FLOAT(2),
+      type: DataTypes.INTEGER,
+      allowNull: true,
       validate: {
-        min: 0.1,
-        isFloat: true,
+        min: 1
       },
-      get() {
-        return `${this.getDataValue('weight')} kg`;
-      }
     },
   }, {
     timestamps: false

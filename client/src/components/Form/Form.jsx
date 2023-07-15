@@ -7,12 +7,12 @@ const Form = ({ addPokemon, allTypes }) => {
         {
             name: '',
             image: '',
-            hp: 0,
-            attack: 0,
-            defense: 0,
-            speed: 0,
-            height: 0,
-            weight: 0,
+            hp: 1,
+            attack: 1,
+            defense: 1,
+            // speed: 1,
+            // height: 1,
+            // weight: 1,
             typeIds: []
         }
     );
@@ -46,12 +46,12 @@ const Form = ({ addPokemon, allTypes }) => {
             {
                 name: '',
                 image: '',
-                hp: 0,
-                attack: 0,
-                defense: 0,
-                speed: 0,
-                height: 0,
-                weight: 0,
+                hp: 1,
+                attack: 1,
+                defense: 1,
+                speed: undefined,
+                height: undefined,
+                weight: undefined,
                 typeIds: []
             }
         );
