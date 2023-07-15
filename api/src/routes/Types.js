@@ -1,5 +1,4 @@
-const { getTypes
-} = require('../controllers/Types');
+const { getTypes } = require('../handlers');
 
 const router = require('express').Router();
 

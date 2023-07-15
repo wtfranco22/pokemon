@@ -5,11 +5,14 @@ const createPokemon = require('./Pokemons/createPokemon');
 const updatePokemon = require('./Pokemons/updatePokemon');
 const deletePokemon = require('./Pokemons/deletePokemon');
 
+const getTypes = require('./Types/getTypes');
+
 module.exports = {
     getAllPokemons,
     getPokemonById,
     getPokemonByName,
     createPokemon,
     updatePokemon,
-    deletePokemon
+    deletePokemon,
+    getTypes
 }

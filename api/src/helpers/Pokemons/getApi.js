@@ -1,5 +1,5 @@
 const axios = require('axios');
-const URL = 'https://pokeapi.co/api/v2/pokemon?limit=1281';
+const URL = 'https://pokeapi.co/api/v2/pokemon?limit=67';
 module.exports = async () => {
 
     const { data } = await axios(URL);
