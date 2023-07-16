@@ -8,10 +8,12 @@ import {
     LOADING_TYPES,
     SET_TYPE_POKEMONS,
     SET_STORAGE_POKEMONS,
+    SHOW_MODAL_POKEMON,
 } from './types';
 
 const initialState = {
     access: false,
+    showModal:false,
     pokemons: [],
     allTypes: [],
     pokemonsByStorage: [],
@@ -52,6 +54,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 pokemonDetail: payload
+            };
+        case SHOW_MODAL_POKEMON:
+            return{
+                ...state,
+                showModal: payload
             }
         case CLEAN_POKEMON_DETAIL:
             return {

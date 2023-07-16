@@ -8,7 +8,8 @@ import {
     SET_INDEX_PAGE,
     LOADING_TYPES,
     SET_TYPE_POKEMONS,
-    SET_STORAGE_POKEMONS
+    SET_STORAGE_POKEMONS,
+    SHOW_MODAL_POKEMON
 } from './types';
 import axios from 'axios';
 
@@ -99,4 +100,23 @@ export const setStoragePokemons = (storage) => {
         await dispatch({ type: SET_TYPE_POKEMONS, payload: false });
         await dispatch(setIndexPage(1));
     };
+};
+
+export const getPokemonByName = (name) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios(`${URL}?name=${name}`);
+            await dispatch({
+                type: GET_POKEMON_DETAIL,
+                payload: data
+            });
+            await dispatch(setShowModal(true));
+        } catch (error) {
+            alert(error.message)
+        };
+    };
+};
+
+export const setShowModal = (bool) => {
+    return { type: SHOW_MODAL_POKEMON, payload: bool };
 };

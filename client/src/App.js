@@ -4,10 +4,11 @@ import { Landing, Home, Detail, Create } from './pages';
 import { useEffect } from 'react';
 import './App.css';
 import { loadingPokemons, loadingTypes, setAccess } from './redux/actions';
-import { Header } from './components';
+import { Header, ModalPokemon } from './components';
 
 const App = () => {
   const access = useSelector((state) => state.access);
+  const showModal = useSelector((state) => state.showModal);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const start = (bool) => {
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <>
       {access && <Header />}
+      {showModal && <ModalPokemon/>}
       <Routes>
         <Route path='/' element={<Landing start={start} />} />
         <Route path='/Home' element={<Home />} />
