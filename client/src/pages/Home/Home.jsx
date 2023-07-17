@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Cards } from '../../components';
 import styles from './Home.module.css';
 import { useEffect, useState } from 'react';
-import { setIndexPage, setStoragePokemons, setTypesPokemons } from '../../redux/actions';
+import { setIndexPage, setOrderPokemons, setStoragePokemons, setTypesPokemons } from '../../redux/actions';
 import { NavLink } from 'react-router-dom';
 import { TiUserAdd } from 'react-icons/ti';
 
@@ -13,6 +13,9 @@ const Home = () => {
     const allTypes = useSelector((state) => state.allTypes);
     const filterByType = useSelector((state) => state.filterByType);
     const filterByStorage = useSelector((state) => state.filterByStorage);
+    const filterByOrder = useSelector((state)=>state.filterByOrder);
+    const orders = ['A-Z', 'Z-A', 'ATTACK_ASC', 'ATTACK_DESC'];
+
     const [showPokemons, setShowPokemons] = useState([]);
     const dispatch = useDispatch();
     const handleClick = (event) => {
@@ -25,12 +28,15 @@ const Home = () => {
     const handleChangeType = (event) => {
         dispatch(setTypesPokemons(event.target.value));
     };
+    const handleChangeOrder = (event) => {
+        dispatch(setOrderPokemons(event.target.value));
+    }
     useEffect(() => {
         setShowPokemons(updatedShowPokemons);
     }, [updatedShowPokemons]);
     return (
         <div className={styles.container}>
-            
+
             <div className={styles.header}>
                 <span className={styles.header_title}>Home</span>
                 <NavLink to={'/create'} className={styles.create}>
@@ -42,8 +48,9 @@ const Home = () => {
             <div className={styles.filters}>
                 <div>
                     <h3>ORDER</h3>
-                    <select className={styles.order}>
-                        {['ID++', 'ID--', 'A-Z', 'Z-A', 'ATTACK++', 'ATTACK--'].map((order, i) =>
+                    <select className={styles.order} value={filterByOrder} onChange={handleChangeOrder}>
+                        <option value="default" >Default</option>
+                        {orders.map((order, i) =>
                             (<option key={i} value={order}>{order}</option>)
                         )}
                     </select>
@@ -56,7 +63,6 @@ const Home = () => {
                             (<option key={type.id} value={type.name}>{type.name}</option>)
                         )}
                     </select>
-                    <span className={styles.types_choice}>FIRE</span>
                 </div>
 
                 <div className={styles.storage}>

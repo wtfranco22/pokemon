@@ -95,7 +95,8 @@ const Form = ({ addPokemon, allTypes }) => {
                 <p>{errors.weight}</p>
                 <label>
                     Types:
-                    <select onChange={handleChange} name='types'>
+                    <select onChange={handleChange} name='types' value={'default'}>
+                        <option value="default" disabled>Select types</option>
                         {allTypes.map((type) => (
                             <option key={type.id} value={type.id}>{type.name}</option>
                         ))}

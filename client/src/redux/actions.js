@@ -9,7 +9,8 @@ import {
     LOADING_TYPES,
     SET_TYPE_POKEMONS,
     SET_STORAGE_POKEMONS,
-    SHOW_MODAL_POKEMON
+    SHOW_MODAL_POKEMON,
+    SET_ORDER_POKEMONS
 } from './types';
 import axios from 'axios';
 
@@ -90,6 +91,7 @@ export const setIndexPage = (index) => {
 export const setTypesPokemons = (type) => {
     return async (dispatch) => {
         await dispatch({ type: SET_TYPE_POKEMONS, payload: type });
+        await dispatch({ type: SET_ORDER_POKEMONS, payload: null });
         await dispatch(setIndexPage(1));
     };
 };
@@ -98,6 +100,14 @@ export const setStoragePokemons = (storage) => {
     return async (dispatch) => {
         await dispatch({ type: SET_STORAGE_POKEMONS, payload: storage });
         await dispatch({ type: SET_TYPE_POKEMONS, payload: false });
+        await dispatch({ type: SET_ORDER_POKEMONS, playload: null });
+        await dispatch(setIndexPage(1));
+    };
+};
+
+export const setOrderPokemons = (order) => {
+    return async (dispatch) => {
+        await dispatch({ type: SET_ORDER_POKEMONS, payload: order });
         await dispatch(setIndexPage(1));
     };
 };

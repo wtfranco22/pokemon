@@ -9,18 +9,21 @@ import {
     SET_TYPE_POKEMONS,
     SET_STORAGE_POKEMONS,
     SHOW_MODAL_POKEMON,
+    SET_ORDER_POKEMONS,
 } from './types';
 
 const initialState = {
     access: false,
-    showModal:false,
+    showModal: false,
     pokemons: [],
     allTypes: [],
     pokemonsByStorage: [],
     pokemonsByTypes: [],
+    pokemonsByOrder: [],
     updatedShowPokemons: [],
     filterByStorage: 'all',
     filterByType: 'all',
+    filterByOrder: 'default',
     pokemonDetail: null,
     indexPage: 1,
     quantityPokemons: 12,
@@ -37,6 +40,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 pokemons: payload,
                 pokemonsByStorage: payload,
                 pokemonsByTypes: payload,
+                pokemonsByOrder: payload,
                 updatedShowPokemons: payload.slice(state.indexfirstPokemon, state.indexLastPokemon),
                 quantityPages: Math.round(payload.length / state.quantityPokemons),
             };
@@ -56,7 +60,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 pokemonDetail: payload
             };
         case SHOW_MODAL_POKEMON:
-            return{
+            return {
                 ...state,
                 showModal: payload
             }
@@ -100,10 +104,34 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 quantityPages: Math.round(updateByType.length / state.quantityPokemons),
                 pokemonsByTypes: updateByType,
             };
+        case SET_ORDER_POKEMONS:
+            let filterOrders = [];
+            switch (payload || state.filterByOrder) {
+                case 'A-Z':
+                    filterOrders = [...state.pokemonsByTypes].sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'Z-A':
+                    filterOrders = [...state.pokemonsByTypes].sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'ATTACK_ASC':
+                    filterOrders = [...state.pokemonsByTypes].sort((a, b) => a.attack - b.attack);
+                    break;
+                case 'ATTACK_DESC':
+                    filterOrders = [...state.pokemonsByTypes].sort((a, b) => b.attack - a.attack);
+                    break;
+                default:
+                    filterOrders = state.pokemonsByTypes;
+                    break;
+            };
+            return {
+                ...state,
+                pokemonsByOrder: filterOrders,
+                filterByOrder: payload
+            }
         case SET_INDEX_PAGE:
             let first = (payload - 1) * state.quantityPokemons;
             let last = payload * state.quantityPokemons;
-            let update = state.pokemonsByTypes.slice(first, last);
+            let update = state.pokemonsByOrder.slice(first, last);
             return {
                 ...state,
                 indexPage: payload,
