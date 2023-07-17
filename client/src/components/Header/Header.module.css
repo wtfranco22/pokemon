@@ -1,4 +1,15 @@
-.container{
-    background-color: blue;
-    min-height: 5em;
+.container {
+    display: flex;
+    /* background-color: #1d4573; */
+    background-color: transparent;
+    justify-content: space-between;
+    padding-inline: 5em;
+    align-items: center;
+    border-bottom:.2em solid #ccc;
+}
+
+.icon {
+    font-size: 5em;
+    color: white;
+    font-weight: 900;
 }

@@ -3,6 +3,8 @@ import { Cards } from '../../components';
 import styles from './Home.module.css';
 import { useEffect, useState } from 'react';
 import { setIndexPage, setStoragePokemons, setTypesPokemons } from '../../redux/actions';
+import { NavLink } from 'react-router-dom';
+import { TiUserAdd } from 'react-icons/ti';
 
 const Home = () => {
     const updatedShowPokemons = useSelector((state) => state.updatedShowPokemons);
@@ -28,33 +30,58 @@ const Home = () => {
     }, [updatedShowPokemons]);
     return (
         <div className={styles.container}>
-            <h1>Home</h1>
-            <div>
-                <input type="radio" value="bd" name="storage" checked={filterByStorage === 'bd'} onChange={handleChangeStorage} /> DB
-                <input type="radio" value="api" name="storage" checked={filterByStorage === 'api'} onChange={handleChangeStorage} /> API
-                <input type="radio" value="all" name="storage" checked={filterByStorage === 'all'} onChange={handleChangeStorage} /> API & BD
+            
+            <div className={styles.header}>
+                <span className={styles.header_title}>Home</span>
+                <NavLink to={'/create'} className={styles.create}>
+                    <span className={styles.createText}>New </span>
+                    <span className={styles.icon}><TiUserAdd /></span>
+                </NavLink>
             </div>
-            <select value={filterByType} onChange={handleChangeType} >
-                <option value={'all'}>All types</option>
-                {allTypes?.map((type) => {
-                    return (<option key={type.id} value={type.name}>{type.name}</option>);
-                })}
-            </select>
-            <div>
+
+            <div className={styles.filters}>
+                <div>
+                    <h3>ORDER</h3>
+                    <select className={styles.order}>
+                        {['ID++', 'ID--', 'A-Z', 'Z-A', 'ATTACK++', 'ATTACK--'].map((order, i) =>
+                            (<option key={i} value={order}>{order}</option>)
+                        )}
+                    </select>
+                </div>
+                <div>
+                    <h3>TYPES</h3>
+                    <select value={filterByType} onChange={handleChangeType} className={styles.types}>
+                        <option value={'all'}>All types</option>
+                        {allTypes?.map((type) =>
+                            (<option key={type.id} value={type.name}>{type.name}</option>)
+                        )}
+                    </select>
+                    <span className={styles.types_choice}>FIRE</span>
+                </div>
+
+                <div className={styles.storage}>
+                    <h3>STORAGE</h3>
+                    <div className={styles.storage_choice}>
+                        <input type="radio" value="all" name="storage" checked={filterByStorage === 'all'} onChange={handleChangeStorage} />API & BD
+                    </div>
+                    <div className={styles.storage_choice}>
+                        <input type="radio" value="api" name="storage" checked={filterByStorage === 'api'} onChange={handleChangeStorage} />POKE API
+                    </div>
+                    <div className={styles.storage_choice}>
+                        <input type="radio" value="bd" name="storage" checked={filterByStorage === 'bd'} onChange={handleChangeStorage} />DATABASE
+                    </div>
+                </div>
+            </div>
+
+            <div className={styles.paginate}>
                 <button onClick={handleClick} value={'+'} disabled={indexPage === 1}>
-                    Anterior
+                    Previus
                 </button>
-                <span>{indexPage} / {quantityPages || 1}</span>
-                <button onClick={handleClick} value={'-'} disabled={indexPage >= quantityPages}>Siguiente</button>
+                <span>Page {indexPage} of {quantityPages || 1}</span>
+                <button onClick={handleClick} value={'-'} disabled={indexPage >= quantityPages}>Next</button>
             </div>
+
             <Cards pokemons={showPokemons} />
-            <div>
-                <button onClick={handleClick} value={'+'} disabled={indexPage === 1}>
-                    Anterior
-                </button>
-                <span>{indexPage} / {quantityPages || 1}</span>
-                <button onClick={handleClick} value={'-'} disabled={indexPage >= quantityPages}>Siguiente</button>
-            </div>
         </div>
     );
 };

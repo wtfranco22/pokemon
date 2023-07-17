@@ -31,7 +31,7 @@ const Form = ({ addPokemon, allTypes }) => {
     );
     const [send, setSend] = useState(false);
     useEffect(() => {
-        console.log(newPokemon);
+        // console.log(newPokemon);
         setErrors(validate(newPokemon));
     }, [newPokemon]);
 
