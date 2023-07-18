@@ -1,9 +1,10 @@
-const regexAZ = /^[a-záéíóú]+$/i;
+const regexAZ = /^[a-záéíóú ]+$/i;
 const regexInt = /^([1-9]\d{0,2}|999)$/;
 const regexHTTPS = /^https:\/\//;
 const validate = (pokemonData) => {
     let errors = {};
     if (!regexAZ.test(pokemonData.name.toLowerCase())) errors.name = 'Please enter a string';
+    if (pokemonData.name.trim() === '') errors.name = 'Please enter a string';
     if (pokemonData.length > 50) errors.name = 'The name exceeds the character limit allowed'
     if (!regexHTTPS.test(pokemonData.image)) errors.image = 'Image URL must start with "https://"';
     if (pokemonData.image.trim() === '') errors.image = 'Please enter a img';
