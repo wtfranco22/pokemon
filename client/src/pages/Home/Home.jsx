@@ -13,7 +13,7 @@ const Home = () => {
     const allTypes = useSelector((state) => state.allTypes);
     const filterByType = useSelector((state) => state.filterByType);
     const filterByStorage = useSelector((state) => state.filterByStorage);
-    const filterByOrder = useSelector((state)=>state.filterByOrder);
+    const filterByOrder = useSelector((state) => state.filterByOrder);
     const orders = ['A-Z', 'Z-A', 'ATTACK_ASC', 'ATTACK_DESC'];
 
     const [showPokemons, setShowPokemons] = useState([]);
@@ -57,12 +57,20 @@ const Home = () => {
                 </div>
                 <div>
                     <h3>TYPES</h3>
-                    <select value={filterByType} onChange={handleChangeType} className={styles.types}>
-                        <option value={'all'}>All types</option>
+                    <select onChange={handleChangeType} className={styles.types}>
+                        {filterByType[0] === 'all' && <option> All types</option>}
                         {allTypes?.map((type) =>
                             (<option key={type.id} value={type.name}>{type.name}</option>)
                         )}
                     </select>
+                    {/* {filterByType.length !== 0 && filterByType.map((tipo, i) => {
+                        const type = allTypes.find((t) => t.name === tipo);
+                        return (
+                            <button type='button' key={i} name='types' value={type.id}>
+                                {type && type.name}
+                            </button>
+                        );
+                    })} */}
                 </div>
 
                 <div className={styles.storage}>

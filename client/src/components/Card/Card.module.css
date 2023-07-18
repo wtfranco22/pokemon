@@ -1,6 +1,6 @@
 .container {
     text-decoration: none;
-    color: black;
+    color: white;
     display: flex;
     flex-direction: column;
     width: 11em;
@@ -11,4 +11,7 @@
 
 .image {
     transform: translateY(-50%);
+}
+.container{
+    color: black;
 }

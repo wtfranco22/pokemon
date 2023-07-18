@@ -22,7 +22,7 @@ const initialState = {
     pokemonsByOrder: [],
     updatedShowPokemons: [],
     filterByStorage: 'all',
-    filterByType: 'all',
+    filterByType: ['all'],
     filterByOrder: 'default',
     pokemonDetail: null,
     indexPage: 1,
@@ -89,18 +89,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 pokemonsByStorage: updateByStorage,
             };
         case SET_TYPE_POKEMONS:
+            let filters = [];
+            if ((state.filterByType[0] === 'all')) {
+                alert(state.filterByType);
+                filters = (payload) ? [payload] : state.filterByType;
+            } else {
+                filters = ([...state.filterByType, payload])
+            };
             let updateByType = [];
-            let filter = payload || state.filterByType;
-            if (filter === 'all') {
+            if (filters[0] === 'all') {
                 updateByType = state.pokemonsByStorage;
             } else {
-                updateByType = state.pokemonsByStorage.filter((pokemon) =>
-                    (pokemon.types.find((tipe) => tipe.name === filter))
+                updateByType = state.pokemonsByStorage.filter(pokemon =>
+                    filters.every(filter => pokemon.types.some(type => type.name === filter))
                 );
             };
             return {
                 ...state,
-                filterByType: filter,
+                filterByType: filters,
                 quantityPages: Math.round(updateByType.length / state.quantityPokemons),
                 pokemonsByTypes: updateByType,
             };
@@ -126,7 +132,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 pokemonsByOrder: filterOrders,
-                filterByOrder: payload
+                filterByOrder: payload || state.filterByOrder
             }
         case SET_INDEX_PAGE:
             let first = (payload - 1) * state.quantityPokemons;
