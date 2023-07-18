@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './ModalPokemon.module.css';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { setShowModal } from '../../redux/actions';
 
 const ModalPokemon = () => {
