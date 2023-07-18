@@ -89,13 +89,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 filterByStorage: filterStorage,
                 pokemonsByStorage: updateByStorage,
             };
-        case SET_TYPE_POKEMONS:
-            let filters = [];
+        case SET_TYPE_POKEMONS: //['water']
+            // ['fire']
+            let types = [];
             if ((state.filterByType[0] === 'all')) {
-                filters = (payload) ? [payload] : state.filterByType;
+                types = (payload) ? [payload] : state.filterByType;
             } else {
-                filters = (payload) ? ([...state.filterByType, payload]) : state.filterByType;
+                types = (payload) ? ([...state.filterByType, payload]) : state.filterByType;
             };
+            let filters = [];
+            if (types.length > 1) {
+                types.forEach((type) => {
+                    if (!filters.includes(type)) {
+                        filters.push(type);
+                    } else {
+                        filters.splice(filters.indexOf(type), 1);
+                    };
+                });
+                if (filters.length === 0) filters.push('all');
+            } else {
+                filters = types;
+            }
             let updateByType = [];
             if (filters[0] === 'all') {
                 updateByType = state.pokemonsByStorage;
@@ -104,6 +118,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                     filters.every(filter => pokemon.types.some(type => type.name === filter))
                 );
             };
+            console.log(filters);
             return {
                 ...state,
                 filterByType: filters,

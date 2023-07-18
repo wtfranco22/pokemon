@@ -57,20 +57,22 @@ const Home = () => {
                 </div>
                 <div>
                     <h3>TYPES</h3>
-                    <select onChange={handleChangeType} className={styles.types}>
-                        {filterByType[0] === 'all' && <option> All types</option>}
-                        {allTypes?.map((type) =>
+                    <select value='default' onChange={handleChangeType} className={styles.types}>
+                        <option value={'default'}>Select types</option>
+                        {[...allTypes].sort((a, b) => a.name.localeCompare(b.name))?.map((type) =>
                             (<option key={type.id} value={type.name}>{type.name}</option>)
                         )}
                     </select>
-                    {/* {filterByType.length !== 0 && filterByType.map((tipo, i) => {
-                        const type = allTypes.find((t) => t.name === tipo);
-                        return (
-                            <button type='button' key={i} name='types' value={type.id}>
-                                {type && type.name}
-                            </button>
-                        );
-                    })} */}
+                    <div className={styles.types_selected}>
+                        {filterByType.length !== 0 && filterByType[0] !== 'all' && filterByType.map((tipo, i) => {
+                            const type = allTypes.find((t) => t.name === tipo);
+                            return (
+                                <button type='button' key={i} name='types' value={type.name} onClick={handleChangeType} className={styles.types_selected_btn}>
+                                    {type && type.name}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
 
                 <div className={styles.storage}>
