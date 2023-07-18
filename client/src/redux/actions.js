@@ -78,6 +78,7 @@ export const createPokemon = (pokemon) => {
                 type: CREATE_POKEMON,
                 payload: data
             });
+            await dispatch(setStoragePokemons(false));
         } catch (error) {
             alert(error.message);
         };
@@ -91,7 +92,7 @@ export const setIndexPage = (index) => {
 export const setTypesPokemons = (type) => {
     return async (dispatch) => {
         await dispatch({ type: SET_TYPE_POKEMONS, payload: type });
-        await dispatch({ type: SET_ORDER_POKEMONS, payload: null });
+        await dispatch({ type: SET_ORDER_POKEMONS, payload: false });
         await dispatch(setIndexPage(1));
     };
 };
@@ -100,7 +101,7 @@ export const setStoragePokemons = (storage) => {
     return async (dispatch) => {
         await dispatch({ type: SET_STORAGE_POKEMONS, payload: storage });
         await dispatch({ type: SET_TYPE_POKEMONS, payload: false });
-        await dispatch({ type: SET_ORDER_POKEMONS, playload: null });
+        await dispatch({ type: SET_ORDER_POKEMONS, playload: false });
         await dispatch(setIndexPage(1));
     };
 };

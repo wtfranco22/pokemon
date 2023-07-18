@@ -76,25 +76,25 @@ const rootReducer = (state = initialState, { type, payload }) => {
             };
         case SET_STORAGE_POKEMONS:
             let updateByStorage = [];
-            if (payload === 'all') {
+            let filterStorage = payload || state.filterByStorage;
+            if (filterStorage === 'all') {
                 updateByStorage = state.pokemons;
-            } else if (payload === 'bd') {
+            } else if (filterStorage === 'bd') {
                 updateByStorage = state.pokemons.filter((pokemon) => isNaN(pokemon.id));
             } else {
                 updateByStorage = state.pokemons.filter((pokemon) => !isNaN(pokemon.id));
             };
             return {
                 ...state,
-                filterByStorage: payload,
+                filterByStorage: filterStorage,
                 pokemonsByStorage: updateByStorage,
             };
         case SET_TYPE_POKEMONS:
             let filters = [];
             if ((state.filterByType[0] === 'all')) {
-                alert(state.filterByType);
                 filters = (payload) ? [payload] : state.filterByType;
             } else {
-                filters = ([...state.filterByType, payload])
+                filters = (payload) ? ([...state.filterByType, payload]) : state.filterByType;
             };
             let updateByType = [];
             if (filters[0] === 'all') {
