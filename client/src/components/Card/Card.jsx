@@ -22,11 +22,11 @@ const Card = ({ pokemon }) => {
         fairy: '#D685AD',
     };
     return (
+        // eslint-disable-next-line no-restricted-globals
         <NavLink to={`/Details/${pokemon.id}`} className={styles.container} style={{ backgroundImage: `linear-gradient(to bottom, ${colours[pokemon.types[0].name]},#fff)` }}>
             <img src={pokemon.image} alt={pokemon.name} className={styles.image} />
-            <h3>ID: {pokemon.id}</h3>
-            <h3>NAME: {pokemon.name}</h3>
-            <h3>TYPE: {pokemon.types[0]?.name.toUpperCase()} {pokemon.types[1] && `, ${pokemon.types[1].name.toUpperCase()}`}</h3>
+            <span className={styles.name}>{pokemon.name} </span>
+            <span className={styles.types} >{pokemon.types[0]?.name.toLowerCase()} {pokemon.types[1] && `& ${pokemon.types[1].name.toLowerCase()}`}</span>
         </NavLink>
     );
 };

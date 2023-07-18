@@ -10,7 +10,6 @@
     align-items: center;
     z-index: 1;
     backdrop-filter: blur(4px);
-    /* flex-direction: column; */
     color: white;
 }
 
@@ -25,7 +24,8 @@
     text-align: center;
     margin-top: 5em;
 }
-.description{
+
+.description {
     display: flex;
     flex-direction: column;
 }
@@ -37,8 +37,21 @@
     right: 25em;
     width: 5em;
 }
-.link{
+
+.link {
     margin-top: 5em;
     color: white;
-    font-size: 1em ;
+    font-size: 1em;
+    transition: .3s ease all;
+}
+
+.link:hover {
+    transform: scale(1.6);
+}
+
+.btn_close:hover {
+    cursor: pointer;
+    background-color: #fc746a;
+    border-color: #fc746a;
+    box-shadow: 0px 0px 2px #000;
 }

@@ -9,6 +9,7 @@ const Search = () => {
    const dispatch = useDispatch();
    const handleClick = () => {
       dispatch(getPokemonByName(name));
+      setName('');
    };
    const handleInput = (event) => {
       setName(event.target.value);

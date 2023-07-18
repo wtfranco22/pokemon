@@ -7,12 +7,9 @@ const Form = ({ addPokemon, allTypes }) => {
         {
             name: '',
             image: '',
-            hp: 1,
-            attack: 1,
-            defense: 1,
-            // speed: 1,
-            // height: 1,
-            // weight: 1,
+            hp: null,
+            attack: null,
+            defense: null,
             typeIds: []
         }
     );
@@ -31,7 +28,6 @@ const Form = ({ addPokemon, allTypes }) => {
     );
     const [send, setSend] = useState(false);
     useEffect(() => {
-        // console.log(newPokemon);
         setErrors(validate(newPokemon));
     }, [newPokemon]);
 
@@ -69,50 +65,67 @@ const Form = ({ addPokemon, allTypes }) => {
     return (
         <div className={styles.container}>
             <form onSubmit={handleSubmit} autoComplete='off' >
-                <label>Name:</label>
-                <input type='text' name='name' value={newPokemon.name} onChange={handleChange} placeholder='Name' /> <br />
-                <p>{errors.name}</p>
-                <label>Image:</label>
-                <input type='text' name='image' value={newPokemon.image} onChange={handleChange} placeholder='Image' /> <br />
-                <p>{errors.image}</p>
-                <label>Hp:</label>
-                <input type='number' name='hp' value={newPokemon.hp} onChange={handleChange} placeholder='life' /> <br />
-                <p>{errors.hp}</p>
-                <label>Attack:</label>
-                <input type='number' name='attack' value={newPokemon.attack} onChange={handleChange} placeholder='attack' /> <br />
-                <p>{errors.attack}</p>
-                <label>Defense:</label>
-                <input type='number' name='defense' value={newPokemon.defense} onChange={handleChange} placeholder='defense' /> <br />
-                <p>{errors.defense}</p>
-                <label>Speed:</label>
-                <input type='number' name='speed' value={newPokemon.speed} onChange={handleChange} placeholder='speed' /> <br />
-                <p>{errors.speed}</p>
-                <label>Height:</label>
-                <input type='number' name='height' value={newPokemon.height} onChange={handleChange} placeholder='height' /> <br />
-                <p>{errors.height}</p>
-                <label>Weight:</label>
-                <input type='number' name='weight' value={newPokemon.weight} onChange={handleChange} placeholder='weight' /> <br />
-                <p>{errors.weight}</p>
-                <label>
-                    Types:
-                    <select onChange={handleChange} name='types' value={'default'}>
-                        <option value="default" disabled>Select types</option>
-                        {allTypes.map((type) => (
-                            <option key={type.id} value={type.id}>{type.name}</option>
-                        ))}
-                    </select>
-                </label>
-                {newPokemon.typeIds.length !== 0 && newPokemon.typeIds.map((typeId, i) => {
-                    const type = allTypes.find((t) => t.id === typeId);
-                    return (
-                        <button type='button' key={i} name='types' value={type.id} onClick={handleChange}>
-                            {type && type.name}
-                        </button>
-                    );
-                })}
-                <p>{errors.typeIds}</p>
-
-                <button type='submit' disabled={!send}>Create</button>
+                <div className={styles.input}>
+                    <label className={styles.label}>Name:</label>
+                    <input type='text' name='name' value={newPokemon.name} onChange={handleChange} placeholder='Name' /> <br />
+                    <p>{errors.name}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>Image:</label>
+                    <input type='text' name='image' value={newPokemon.image} onChange={handleChange} placeholder='Image' /> <br />
+                    <p>{errors.image}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>Hp:</label>
+                    <input type='number' name='hp' value={newPokemon.hp} onChange={handleChange} placeholder='life' /> <br />
+                    <p>{errors.hp}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>Attack:</label>
+                    <input type='number' name='attack' value={newPokemon.attack} onChange={handleChange} placeholder='attack' /> <br />
+                    <p>{errors.attack}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>Defense:</label>
+                    <input type='number' name='defense' value={newPokemon.defense} onChange={handleChange} placeholder='defense' /> <br />
+                    <p>{errors.defense}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>Speed:</label>
+                    <input type='number' name='speed' value={newPokemon.speed} onChange={handleChange} placeholder='speed' /> <br />
+                    <p>{errors.speed}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>Height:</label>
+                    <input type='number' name='height' value={newPokemon.height} onChange={handleChange} placeholder='height' /> <br />
+                    <p>{errors.height}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>Weight:</label>
+                    <input type='number' name='weight' value={newPokemon.weight} onChange={handleChange} placeholder='weight' /> <br />
+                    <p>{errors.weight}</p>
+                </div>
+                <div className={styles.input}>
+                    <label className={styles.label}>
+                        Types:
+                        <select onChange={handleChange} name='types' value={'default'}>
+                            <option value="default" disabled>Select types</option>
+                            {allTypes.sort((a, b) => a.name.localeCompare(b.name)).map((type) => (
+                                <option key={type.id} value={type.id}>{type.name}</option>
+                            ))}
+                        </select>
+                    </label>
+                    {newPokemon.typeIds.length !== 0 && newPokemon.typeIds.map((typeId, i) => {
+                        const type = allTypes.find((t) => t.id === typeId);
+                        return (
+                            <button type='button' key={i} name='types' value={type.id} onClick={handleChange} className={styles.types_selected}>
+                                {type && type.name}
+                            </button>
+                        );
+                    })}
+                    <p>{errors.typeIds}</p>
+                </div>
+                <button type='submit' disabled={!send} className={styles.send_btn}>Create</button>
             </form>
         </div>
     );

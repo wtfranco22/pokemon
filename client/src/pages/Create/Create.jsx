@@ -9,12 +9,12 @@ const Create = () => {
         dispatch(createPokemon(pokemon));
     }
     return (
-        <>
-            <div className={styles.container}>
-                create new pokemon
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <h3>Create pokémon</h3>
             </div>
-            <Form addPokemon={addPokemon} allTypes={allTypes}/>
-        </>
+            <Form addPokemon={addPokemon} allTypes={allTypes} />
+        </div>
     );
 };
 

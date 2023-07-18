@@ -7,11 +7,35 @@
     padding: 0 2em;
     margin-top: 3em;
     border-radius: 5%;
+    min-height: 20em;
+}
+
+.container:hover {
+    box-shadow: 0px 0px 16px 2px white;
 }
 
 .image {
     transform: translateY(-50%);
+    text-align: center;
 }
-.container{
+
+.image:hover {
+    transition: .3s ease all;
+    transform: scale(1.6);
+}
+
+.container {
     color: black;
+}
+
+.name {
+    font-size: 1.2em;
+    text-align: center;
+    margin: auto;
+}
+
+.types {
+    font-size: 1.2em;
+    text-align: center;
+    margin: auto;
 }
