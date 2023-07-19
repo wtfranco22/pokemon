@@ -103,7 +103,7 @@ export const setStoragePokemons = (storage) => {
         await dispatch({ type: SET_STORAGE_POKEMONS, payload: storage });
         await dispatch({ type: SET_TYPE_POKEMONS, payload: false });
         await dispatch({ type: SET_ORDER_POKEMONS, playload: false });
-        await dispatch(setIndexPage(false));
+        await storage ? dispatch(setIndexPage(1)) : dispatch(setIndexPage(false));
     };
 };
 

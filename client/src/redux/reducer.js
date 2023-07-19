@@ -44,7 +44,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 pokemonsByTypes: payload,
                 pokemonsByOrder: payload,
                 updatedShowPokemons: payload.slice(state.indexfirstPokemon, state.indexLastPokemon),
-                quantityPages: Math.round(payload.length / state.quantityPokemons),
+                quantityPages: Math.ceil(payload.length / state.quantityPokemons),
             };
         case LOADING_TYPES:
             return {
@@ -129,7 +129,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 filterByType: filters,
-                quantityPages: Math.round(updateByType.length / state.quantityPokemons),
+                quantityPages: Math.ceil(updateByType.length / state.quantityPokemons),
                 pokemonsByTypes: updateByType,
             };
         case SET_ORDER_POKEMONS:
