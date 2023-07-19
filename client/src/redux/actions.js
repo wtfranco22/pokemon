@@ -10,7 +10,8 @@ import {
     SET_TYPE_POKEMONS,
     SET_STORAGE_POKEMONS,
     SHOW_MODAL_POKEMON,
-    SET_ORDER_POKEMONS
+    SET_ORDER_POKEMONS,
+    SHOW_MODAL_MSG
 } from './types';
 import axios from 'axios';
 
@@ -37,7 +38,7 @@ export const loadingTypes = () => {
                 payload: data
             });
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         };
     };
 };
@@ -58,7 +59,7 @@ export const getPokemonDetail = (id) => {
                 payload: data
             });
         } catch (error) {
-            alert(error.message);
+            await dispatch(setShowMsg({ show: true, msg: error.response.data.error }));
         };
     };
 };
@@ -72,15 +73,15 @@ export const cleanPokemonDetail = () => {
 export const createPokemon = (pokemon) => {
     return async (dispatch) => {
         try {
-            console.log(pokemon);
             const { data } = await axios.post(URL, pokemon);
             await dispatch({
                 type: CREATE_POKEMON,
                 payload: data
             });
             await dispatch(setStoragePokemons(false));
+            await dispatch(setShowMsg({ show: true, msg: 'New pokemon created!' }));
         } catch (error) {
-            alert(error.message);
+            await dispatch(setShowMsg({ show: true, msg: error.response.data.error }));
         };
     };
 };
@@ -102,7 +103,7 @@ export const setStoragePokemons = (storage) => {
         await dispatch({ type: SET_STORAGE_POKEMONS, payload: storage });
         await dispatch({ type: SET_TYPE_POKEMONS, payload: false });
         await dispatch({ type: SET_ORDER_POKEMONS, playload: false });
-        await dispatch(setIndexPage(1));
+        await dispatch(setIndexPage(false));
     };
 };
 
@@ -123,7 +124,7 @@ export const getPokemonByName = (name) => {
             });
             await dispatch(setShowModal(true));
         } catch (error) {
-            alert(error.message)
+            await dispatch(setShowMsg({ show: true, msg: error.response.data.error }));
         };
     };
 };
@@ -131,3 +132,7 @@ export const getPokemonByName = (name) => {
 export const setShowModal = (bool) => {
     return { type: SHOW_MODAL_POKEMON, payload: bool };
 };
+
+export const setShowMsg = (msg) => {
+    return { type: SHOW_MODAL_MSG, payload: msg };
+}

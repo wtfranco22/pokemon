@@ -12,4 +12,10 @@
     font-size: 5em;
     color: white;
     font-weight: 900;
+    transition: .3s ease all;
+
+}
+.icon:hover{
+    cursor: pointer;
+    transform: scale(1.6);
 }

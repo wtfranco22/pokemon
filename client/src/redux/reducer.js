@@ -10,11 +10,13 @@ import {
     SET_STORAGE_POKEMONS,
     SHOW_MODAL_POKEMON,
     SET_ORDER_POKEMONS,
+    SHOW_MODAL_MSG,
 } from './types';
 
 const initialState = {
     access: false,
     showModal: false,
+    showMsg: { show: false, msg: 'this is a error message' },
     pokemons: [],
     allTypes: [],
     pokemonsByStorage: [],
@@ -63,6 +65,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 showModal: payload
+            }
+        case SHOW_MODAL_MSG:
+            return {
+                ...state,
+                showMsg: payload
             }
         case CLEAN_POKEMON_DETAIL:
             return {
@@ -150,12 +157,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 filterByOrder: payload || state.filterByOrder
             }
         case SET_INDEX_PAGE:
-            let first = (payload - 1) * state.quantityPokemons;
-            let last = payload * state.quantityPokemons;
+            let index = payload || state.indexPage;
+            let first = (index - 1) * state.quantityPokemons;
+            let last = index * state.quantityPokemons;
             let update = state.pokemonsByOrder.slice(first, last);
             return {
                 ...state,
-                indexPage: payload,
+                indexPage: index,
                 indexLastPokemon: last,
                 indexFirstPokemon: first,
                 updatedShowPokemons: update
