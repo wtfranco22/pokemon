@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import styles from './Search.module.css';
 import { useDispatch } from 'react-redux';
-import { getPokemonByName } from '../../redux/actions';
+import { getPokemonByName, setShowMsg } from '../../redux/actions';
 import { BiSearchAlt } from 'react-icons/bi';
+import { validateSearch } from '../../utils/validate';
 
 const Search = () => {
    const [name, setName] = useState('');
    const dispatch = useDispatch();
    const handleClick = () => {
-      dispatch(getPokemonByName(name));
+      let error = validateSearch(name);
+      if (error.length) {
+         dispatch((setShowMsg({ show: true, msg: error })));
+      } else {
+         dispatch(getPokemonByName(name));
+      }
       setName('');
    };
    const handleInput = (event) => {

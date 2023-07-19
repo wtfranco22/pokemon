@@ -34,4 +34,9 @@ const validateTypes = (types) => {
     });
     return resTypes;
 };
-export { validate, validateTypes };
+const validateSearch = (name) => {
+    let error = '';
+    if (!regexAZ.test(name) || name.trim() === '') error = 'Please enter a string';
+    return error;
+}
+export { validate, validateTypes, validateSearch };
