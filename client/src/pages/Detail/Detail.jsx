@@ -5,9 +5,14 @@ import { Profile } from '../../components';
 const Detail = () => {
     const pokemon = usePokemon();
     return (
-        <div className={styles.container}>
-            <Profile pokemon={pokemon}/>
-        </div>
+        <>
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    Detail Pokémon
+                </div>
+                <Profile pokemon={pokemon} />
+            </div>
+        </>
     );
 };
 

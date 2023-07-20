@@ -96,8 +96,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
                 filterByStorage: filterStorage,
                 pokemonsByStorage: updateByStorage,
             };
-        case SET_TYPE_POKEMONS: //['water']
-            // ['fire']
+        case SET_TYPE_POKEMONS:
             let types = [];
             if ((state.filterByType[0] === 'all')) {
                 types = (payload) ? [payload] : state.filterByType;
@@ -125,7 +124,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
                     filters.every(filter => pokemon.types.some(type => type.name === filter))
                 );
             };
-            console.log(filters);
             return {
                 ...state,
                 filterByType: filters,

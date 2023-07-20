@@ -22,7 +22,6 @@ const Card = ({ pokemon }) => {
         fairy: '#D685AD',
     };
     return (
-        // eslint-disable-next-line no-restricted-globals
         <NavLink to={`/Details/${pokemon.id}`} className={styles.container} style={{ backgroundImage: `linear-gradient(to bottom, ${colours[pokemon.types[0].name]},#fff)` }}>
             <img src={pokemon.image} alt={pokemon.name} className={styles.image} />
             <span className={styles.name}> {pokemon.name.toUpperCase()} </span>

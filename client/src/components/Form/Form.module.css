@@ -1,9 +1,11 @@
 .container {
     display: flex;
     margin: auto;
-    margin-top: 3em;
-    color: rgb(0, 0, 0);
+    margin-top: 2em;
+    /* color: rgb(0, 0, 0); */
     font-weight: 900;
+    font-size: 1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .input {
@@ -28,11 +30,12 @@
     border-bottom: .2em solid #0e396a;
     outline: none;
     border-radius: .25em;
+    color: white;
 }
 
 .input input:focus {
-    border-color: black;
-    box-shadow: 0px 0px 4px 1px black;
+    border-color: #0e396a;
+    /* box-shadow: 0px 0px 4px 1px 1px black; */
 }
 
 .input input[type="number"] {
@@ -44,7 +47,8 @@
     left: 100%;
     width: 150%;
     margin-left: 1em;
-    color: red;
+    color: rgb(170, 30, 30);
+    text-shadow: none;
 }
 
 .types_selected {
@@ -62,16 +66,22 @@
 
 .send_btn {
     display: block;
-    width: 50%;
+    width: 75%;
     margin: 1em auto;
     background-color: #78b1f3;
     border: .2em solid #c1dcfa;
     border-radius: .3em;
-    font-size: 1em;
-    cursor: pointer;
+    font-size: 1.2em;
+    cursor: pointer;    
 }
 
 .send_btn:disabled {
-    background-color: #fff;
     cursor: not-allowed;
+    background-color: #9cc9fc;
+    color: #505152;
+}
+
+.send_btn:hover{
+    transform: scale(1.2);
+    transition: .3s ease all;
 }

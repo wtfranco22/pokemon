@@ -10,23 +10,16 @@ const Form = ({ addPokemon, allTypes }) => {
             hp: null,
             attack: null,
             defense: null,
+            speed:undefined,
+            height:undefined,
+            weight:undefined,
             typeIds: []
         }
     );
-    const [errors, setErrors] = useState(
-        {
-            name: '',
-            image: '',
-            hp: 0,
-            attack: 0,
-            defense: 0,
-            speed: 0,
-            height: 0,
-            weight: 0,
-            typeIds: ''
-        }
-    );
+    const [errors, setErrors] = useState({});
+
     const [send, setSend] = useState(false);
+    
     useEffect(() => {
         setErrors(validate(newPokemon));
     }, [newPokemon]);
@@ -42,12 +35,12 @@ const Form = ({ addPokemon, allTypes }) => {
             {
                 name: '',
                 image: '',
-                hp: 1,
-                attack: 1,
-                defense: 1,
-                speed: undefined,
-                height: undefined,
-                weight: undefined,
+                hp: null,
+                attack: null,
+                defense: null,
+                speed:undefined,
+                height:undefined,
+                weight:undefined,
                 typeIds: []
             }
         );
@@ -92,17 +85,17 @@ const Form = ({ addPokemon, allTypes }) => {
                 </div>
                 <div className={styles.input}>
                     <label className={styles.label}>Speed:</label>
-                    <input type='number' name='speed' value={newPokemon.speed} onChange={handleChange} placeholder='speed' /> <br />
+                    <input type='text' name='speed' value={newPokemon.speed} onChange={handleChange} placeholder='speed' /> <br />
                     <p>{errors.speed}</p>
                 </div>
                 <div className={styles.input}>
                     <label className={styles.label}>Height:</label>
-                    <input type='number' name='height' value={newPokemon.height} onChange={handleChange} placeholder='height' /> <br />
+                    <input type='text' name='height' value={newPokemon.height} onChange={handleChange} placeholder='height' /> <br />
                     <p>{errors.height}</p>
                 </div>
                 <div className={styles.input}>
                     <label className={styles.label}>Weight:</label>
-                    <input type='number' name='weight' value={newPokemon.weight} onChange={handleChange} placeholder='weight' /> <br />
+                    <input type='text' name='weight' value={newPokemon.weight} onChange={handleChange} placeholder='weight' /> <br />
                     <p>{errors.weight}</p>
                 </div>
                 <div className={styles.input}>
