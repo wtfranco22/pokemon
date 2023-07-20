@@ -16,7 +16,7 @@ import {
 const initialState = {
     access: false,
     showModal: false,
-    showMsg: { show: false, msg: 'this is a error message' },
+    showMsg: { show: false, type: '', msg: '' },
     pokemons: [],
     allTypes: [],
     pokemonsByStorage: [],

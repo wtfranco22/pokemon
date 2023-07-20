@@ -8,11 +8,26 @@ const Msg = () => {
     const handleClick = () => { dispatch(setShowMsg({ show: false, msg: '' })); };
     return (
         <div className={styles.container}>
-            <button type='button' onClick={handleClick} className={styles.btn_close}>close</button>
-            <div className={styles.description}>
-                <h3>Message</h3>
-                <span className={styles.text}> {message.msg} </span>
-            </div>
+            {message.type === 'message' ?
+                (<>
+                {console.log('mensaje')}
+                    <button type='button' onClick={handleClick} className={styles.btn_close}>close</button>
+                    <div className={styles.description}>
+                        <h3>Message</h3>
+                        <span className={styles.text}> {message.msg} </span>
+                    </div>
+                </>) :
+                <>
+                {console.log('loading')}
+                    <div className={styles.pokeball}>
+                        <div className={styles.pokeball__button}>
+                        </div>
+                    </div>
+                    <div className={styles.text}>
+                        L O A D I N G  .  .  .
+                    </div>
+                </>
+            }
         </div>
     );
 };

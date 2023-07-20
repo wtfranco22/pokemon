@@ -53,13 +53,18 @@ export const setAccess = (boolean) => {
 export const getPokemonDetail = (id) => {
     return async (dispatch) => {
         try {
+            await dispatch(setShowMsg({ show: true, type: 'loading', msg: '' }));
             const { data } = await axios(`${URL}/${id}`);
             await dispatch({
                 type: GET_POKEMON_DETAIL,
                 payload: data
             });
         } catch (error) {
-            await dispatch(setShowMsg({ show: true, msg: error.response.data.error }));
+            await dispatch(setShowMsg({ show: true, type: 'message', msg: error.response.data.error }));
+        } finally {
+            setTimeout(() => {
+                dispatch(setShowMsg({ show: false, type: '', msg: '' }));
+            }, 750)
         };
     };
 };
@@ -73,33 +78,45 @@ export const cleanPokemonDetail = () => {
 export const createPokemon = (pokemon) => {
     return async (dispatch) => {
         try {
+            await dispatch(setShowMsg({ show: true, type: 'loading', msg: '' }));
             const { data } = await axios.post(URL, pokemon);
             await dispatch({
                 type: CREATE_POKEMON,
                 payload: data
             });
             await dispatch(setStoragePokemons(false));
-            await dispatch(setShowMsg({ show: true, msg: 'New pokemon created!' }));
+            await dispatch(setShowMsg({ show: true, type: 'message', msg: 'New pokemon created!' }));
         } catch (error) {
-            await dispatch(setShowMsg({ show: true, msg: error.response.data.error }));
-        };
+            await dispatch(setShowMsg({ show: true, type: 'message', msg: error.response.data.error }));
+        }
     };
 };
 
 export const setIndexPage = (index) => {
-    return { type: SET_INDEX_PAGE, payload: index };
+    return async (dispatch) => {
+        await dispatch(setShowMsg({ show: true, type: 'loading', msg: '' }));
+        await dispatch({ type: SET_INDEX_PAGE, payload: index });
+        setTimeout(() => {
+            dispatch(setShowMsg({ show: false, type: '', msg: '' }));
+        }, 750);
+    }
 };
 
 export const setTypesPokemons = (type) => {
     return async (dispatch) => {
+        await dispatch(setShowMsg({ show: true, type: 'loading', msg: '' }));
         await dispatch({ type: SET_TYPE_POKEMONS, payload: type });
         await dispatch({ type: SET_ORDER_POKEMONS, payload: false });
         await dispatch(setIndexPage(1));
+        setTimeout(() => {
+            dispatch(setShowMsg({ show: false, type: '', msg: '' }));
+        }, 750);
     };
 };
 
 export const setStoragePokemons = (storage) => {
     return async (dispatch) => {
+        await dispatch(setShowMsg({ show: true, type: 'loading', msg: '' }));
         await dispatch({ type: SET_STORAGE_POKEMONS, payload: storage });
         await dispatch({ type: SET_TYPE_POKEMONS, payload: false });
         await dispatch({ type: SET_ORDER_POKEMONS, playload: false });
@@ -109,22 +126,28 @@ export const setStoragePokemons = (storage) => {
 
 export const setOrderPokemons = (order) => {
     return async (dispatch) => {
+        await dispatch(setShowMsg({ show: true, type: 'loading', msg: '' }));
         await dispatch({ type: SET_ORDER_POKEMONS, payload: order });
         await dispatch(setIndexPage(1));
+        setTimeout(() => {
+            dispatch(setShowMsg({ show: false, type: '', msg: '' }));
+        }, 750);
     };
 };
 
 export const getPokemonByName = (name) => {
     return async (dispatch) => {
         try {
+            await dispatch(setShowMsg({ show: true, type: 'loading', msg: '' }));
             const { data } = await axios(`${URL}?name=${name}`);
             await dispatch({
                 type: GET_POKEMON_DETAIL,
                 payload: data
             });
             await dispatch(setShowModal(true));
+            await dispatch(setShowMsg({ show: false, type: '', msg: '' }));
         } catch (error) {
-            await dispatch(setShowMsg({ show: true, msg: error.response.data.error }));
+            await dispatch(setShowMsg({ show: true, type: 'message', msg: error.response.data.error }));
         };
     };
 };

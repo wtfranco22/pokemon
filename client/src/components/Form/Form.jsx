@@ -10,16 +10,16 @@ const Form = ({ addPokemon, allTypes }) => {
             hp: null,
             attack: null,
             defense: null,
-            speed:undefined,
-            height:undefined,
-            weight:undefined,
+            speed: null,
+            height: null,
+            weight: null,
             typeIds: []
         }
     );
     const [errors, setErrors] = useState({});
 
     const [send, setSend] = useState(false);
-    
+
     useEffect(() => {
         setErrors(validate(newPokemon));
     }, [newPokemon]);
@@ -38,9 +38,9 @@ const Form = ({ addPokemon, allTypes }) => {
                 hp: null,
                 attack: null,
                 defense: null,
-                speed:undefined,
-                height:undefined,
-                weight:undefined,
+                speed: null,
+                height: null,
+                weight: null,
                 typeIds: []
             }
         );

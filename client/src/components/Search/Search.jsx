@@ -11,7 +11,7 @@ const Search = () => {
    const handleClick = () => {
       let error = validateSearch(name);
       if (error.length) {
-         dispatch((setShowMsg({ show: true, msg: error })));
+         dispatch((setShowMsg({ show: true, type: 'message', msg: error })));
       } else {
          dispatch(getPokemonByName(name));
       }

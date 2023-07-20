@@ -31,11 +31,12 @@
     outline: none;
     border-radius: .25em;
     color: white;
+    background-color: #00000038;
 }
 
 .input input:focus {
     border-color: #0e396a;
-    /* box-shadow: 0px 0px 4px 1px 1px black; */
+    /* background-color: transparent; */
 }
 
 .input input[type="number"] {

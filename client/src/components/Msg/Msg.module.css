@@ -21,7 +21,7 @@
     font-size: 1.5em;
 }
 
-.text{
+.text {
     font-size: 2em;
 }
 
@@ -41,4 +41,86 @@
     border-color: #fc746a;
     border-radius: 10%;
     box-shadow: 0px 0px 2px #000;
+}
+
+.pokeball {
+    position: relative;
+    width: 9em;
+    height: 9em;
+    background: #fff;
+    border: .5em solid #000;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: inset -10px 10px 0 10px #ccc;
+    margin-right: 2em;
+    transition: transform 0.4s ease;
+    animation: shake 1.25s cubic-bezier(.36, .07, .19, .97) infinite;
+}
+
+.pokeball::before,
+.pokeball::after {
+    content: "";
+    position: absolute;
+}
+
+.pokeball::before {
+    background: #e81b07;
+    width: 100%;
+    height: 50%;
+}
+
+.pokeball::after {
+    top: calc(50% - .3em);
+    width: 100%;
+    height: .6em;
+    background: #000;
+}
+
+.pokeball__button {
+    position: absolute;
+    top: calc(50% - 1.3em);
+    left: calc(50% - 1.3em);
+    width: 2.6em;
+    height: 2.6em;
+    border: .5em solid #fff;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 0 10px black;
+    animation: blink .5s alternate infinite;
+}
+
+@keyframes blink {
+    from {
+        background: #eee;
+    }
+
+    to {
+        background: #e81b07;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0, 0) rotate(0);
+    }
+
+    20% {
+        transform: translate(-10px, 0) rotate(-20deg);
+    }
+
+    30% {
+        transform: translate(10px, 0) rotate(20deg);
+    }
+
+    50% {
+        transform: translate(-10px, 0) rotate(-10deg);
+    }
+
+    60% {
+        transform: translate(10px, 0) rotate(10deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0);
+    }
 }
