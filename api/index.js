@@ -24,7 +24,7 @@ require('dotenv').config();
 const { PORT } = process.env;
 
 // Syncing all the models at once.
-conn.sync({ force: true })
+conn.sync({ force: false })
   .then(() => seederTypes())
   .then(() => {
     server.listen(PORT, () => {
