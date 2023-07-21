@@ -1,14 +1,13 @@
 const regexAZ = /^[a-záéíóú ]+$/i;
 const regexInt = /^([1-9]\d{0,2}|999)$/;
 const regexHTTPS = /^https:\/\/assets\.pokemon\.com\/assets\/cms2\/img\/pokedex\/detail\//;
-;
-https://assets.pokemon.com/assets/cms2/img/pokedex/detail/
+
 const validate = (pokemonData) => {
     let errors = {};
     if (!regexAZ.test(pokemonData.name.toLowerCase())) errors.name = 'Please enter a string';
     if (pokemonData.name.trim() === '') errors.name = 'Please enter a string';
     if (pokemonData.length > 10) errors.name = 'The name exceeds the character limit allowed'
-    if (!regexHTTPS.test(pokemonData.image) || pokemonData.image.trim() === '') errors.image = 'Image URL must start with "https://"';
+    if (!regexHTTPS.test(pokemonData.image) || pokemonData.image.trim() === '') errors.image = 'example "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"';
     if (!regexInt.test(pokemonData.hp)) errors.hp = 'Please enter a number between 1 and 999';
     if (!regexInt.test(pokemonData.attack)) errors.attack = 'Please enter a number between 1 and 999';
     if (!regexInt.test(pokemonData.defense)) errors.defense = 'Please enter a number between 1 and 999';
