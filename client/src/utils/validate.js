@@ -1,6 +1,8 @@
 const regexAZ = /^[a-záéíóú ]+$/i;
 const regexInt = /^([1-9]\d{0,2}|999)$/;
-const regexHTTPS = /^https:\/\//;
+const regexHTTPS = /^https:\/\/assets\.pokemon\.com\/assets\/cms2\/img\/pokedex\/detail\//;
+;
+https://assets.pokemon.com/assets/cms2/img/pokedex/detail/
 const validate = (pokemonData) => {
     let errors = {};
     if (!regexAZ.test(pokemonData.name.toLowerCase())) errors.name = 'Please enter a string';
