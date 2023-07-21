@@ -35,12 +35,12 @@ const Form = ({ addPokemon, allTypes }) => {
             {
                 name: '',
                 image: '',
-                hp: null,
-                attack: null,
-                defense: null,
-                speed: null,
-                height: null,
-                weight: null,
+                hp: '',
+                attack: '',
+                defense: '',
+                speed: '',
+                height: '',
+                weight: '',
                 typeIds: []
             }
         );
@@ -57,6 +57,14 @@ const Form = ({ addPokemon, allTypes }) => {
 
     return (
         <div className={styles.container}>
+            <div className={styles.description_image}>
+                    <h3>How to add an image for my pokemon?</h3>
+                    <p>
+                        Visit the pokedex website to search for a pokemon image
+                        and copy its url then paste it in this input field 
+                    </p>
+                        <a href="http://www.pokemon.com/el/pokedex" target="_blank" rel="noopener noreferrer">Pokedéx</a>
+            </div>
             <form onSubmit={handleSubmit} autoComplete='off' >
                 <div className={styles.input}>
                     <label className={styles.label}>Name:</label>
@@ -70,17 +78,17 @@ const Form = ({ addPokemon, allTypes }) => {
                 </div>
                 <div className={styles.input}>
                     <label className={styles.label}>Hp:</label>
-                    <input type='number' name='hp' value={newPokemon.hp} onChange={handleChange} placeholder='life' /> <br />
+                    <input type='text' name='hp' value={newPokemon.hp} onChange={handleChange} placeholder='life' /> <br />
                     <p>{errors.hp}</p>
                 </div>
                 <div className={styles.input}>
                     <label className={styles.label}>Attack:</label>
-                    <input type='number' name='attack' value={newPokemon.attack} onChange={handleChange} placeholder='attack' /> <br />
+                    <input type='text' name='attack' value={newPokemon.attack} onChange={handleChange} placeholder='attack' /> <br />
                     <p>{errors.attack}</p>
                 </div>
                 <div className={styles.input}>
                     <label className={styles.label}>Defense:</label>
-                    <input type='number' name='defense' value={newPokemon.defense} onChange={handleChange} placeholder='defense' /> <br />
+                    <input type='text' name='defense' value={newPokemon.defense} onChange={handleChange} placeholder='defense' /> <br />
                     <p>{errors.defense}</p>
                 </div>
                 <div className={styles.input}>

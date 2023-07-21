@@ -10,7 +10,6 @@ const Msg = () => {
         <div className={styles.container}>
             {message.type === 'message' ?
                 (<>
-                {console.log('mensaje')}
                     <button type='button' onClick={handleClick} className={styles.btn_close}>close</button>
                     <div className={styles.description}>
                         <h3>Message</h3>
@@ -18,7 +17,6 @@ const Msg = () => {
                     </div>
                 </>) :
                 <>
-                {console.log('loading')}
                     <div className={styles.pokeball}>
                         <div className={styles.pokeball__button}>
                         </div>

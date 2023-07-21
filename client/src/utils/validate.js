@@ -5,7 +5,7 @@ const validate = (pokemonData) => {
     let errors = {};
     if (!regexAZ.test(pokemonData.name.toLowerCase())) errors.name = 'Please enter a string';
     if (pokemonData.name.trim() === '') errors.name = 'Please enter a string';
-    if (pokemonData.length > 50) errors.name = 'The name exceeds the character limit allowed'
+    if (pokemonData.length > 10) errors.name = 'The name exceeds the character limit allowed'
     if (!regexHTTPS.test(pokemonData.image) || pokemonData.image.trim() === '') errors.image = 'Image URL must start with "https://"';
     if (!regexInt.test(pokemonData.hp)) errors.hp = 'Please enter a number between 1 and 999';
     if (!regexInt.test(pokemonData.attack)) errors.attack = 'Please enter a number between 1 and 999';
