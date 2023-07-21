@@ -32,7 +32,7 @@ export const loadingPokemons = () => {
 export const loadingTypes = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios('http://localhost:3001/types');
+            const { data } = await axios('https://pokemon-production-cc31.up.railway.app/types');
             await dispatch({
                 type: LOADING_TYPES,
                 payload: data
