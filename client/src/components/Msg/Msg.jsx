@@ -5,7 +5,7 @@ import { setShowMsg } from '../../redux/actions';
 const Msg = () => {
     const message = useSelector((state) => state.showMsg);
     const dispatch = useDispatch();
-    const handleClick = () => { dispatch(setShowMsg({ show: false, msg: '' })); };
+    const handleClick = () => { dispatch(setShowMsg({ show: false, type: '', msg: '' })); };
     return (
         <div className={styles.container}>
             {message.type === 'message' ?

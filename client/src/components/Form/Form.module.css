@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    justify-content: start;
+    /* justify-content: start; */
     margin: 2em 0;
     font-weight: 900;
     font-size: 1em;
@@ -50,7 +50,7 @@
 }
 
 .input input[type="number"] {
-    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .input p {
